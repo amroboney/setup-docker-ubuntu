@@ -16,12 +16,12 @@ To use this script, you need to provide your GitHub email and the password for t
 1. Clone the repository or download the script.
 2. Make the script executable:
    ```bash
-   chmod +x setup-docker-ubuntu.sh
+   chmod +x docker-setup-ubuntu.sh
    ```
 
 3. Run the script with your GitHub email and desired password for `dockeruser`:
    ```bash
-   sudo ./setup-docker-ubuntu.sh your_github_email@example.com your_dockeruser_password
+   sudo ./docker-setup-ubuntu.sh your_github_email@example.com your_dockeruser_password
    ```
 
 ### Features

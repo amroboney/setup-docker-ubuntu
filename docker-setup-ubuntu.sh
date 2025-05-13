@@ -38,13 +38,30 @@ sudo chmod +x /usr/local/bin/docker-compose
 echo "Generating SSH key for 'dockeruser'..."
 sudo -u dockeruser ssh-keygen -t rsa -b 4096 -C "$GITHUB_EMAIL" -f "/home/dockeruser/.ssh/github" -N ""
 
-# Step 7: Add SSH key to GitHub (display the key for copying)
+# Step 7: Set up SSH config file for 'dockeruser'
+echo "Configuring SSH for 'dockeruser'..."
+SSH_CONFIG_FILE="/home/dockeruser/.ssh/config"
+sudo -u dockeruser bash -c "cat <<EOF > $SSH_CONFIG_FILE
+Host github.com
+  HostName github.com
+  User git
+  IdentityFile /home/dockeruser/.ssh/id_rsa
+  IdentitiesOnly yes
+EOF"
+
+# Set proper permissions for the SSH directory and config file
+sudo chmod 700 /home/dockeruser/.ssh
+sudo chmod 600 $SSH_CONFIG_FILE
+sudo chown -R dockeruser:dockeruser /home/dockeruser/.ssh
+
+
+# Step 8: Add SSH key to GitHub (display the key for copying)
 echo "Your SSH public key for GitHub is:"
 cat /home/dockeruser/.ssh/github.pub
 
 echo "Copy the public key above and add it to your GitHub account at: https://github.com/settings/keys"
 
-# Step 8: Test Docker installation and SSH connection (as 'dockeruser')
+# Step 9: Test Docker installation and SSH connection (as 'dockeruser')
 echo "Testing Docker installation..."
 sudo -u dockeruser docker --version
 

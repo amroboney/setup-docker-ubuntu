@@ -45,7 +45,7 @@ sudo -u dockeruser bash -c "cat <<EOF > $SSH_CONFIG_FILE
 Host github.com
   HostName github.com
   User git
-  IdentityFile /home/dockeruser/.ssh/id_rsa
+  IdentityFile /home/dockeruser/.ssh/github
   IdentitiesOnly yes
 EOF"
 
